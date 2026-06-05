@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+
+# Dev tooling
+.claude/
+
+# Working/scratch files (not part of the site)
+screenshot.png
+make_pdf.py
+*.pdf
+
+# Original PNG exports — superseded by optimized .webp
+asset/*.png

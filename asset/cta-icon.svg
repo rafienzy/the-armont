@@ -1,0 +1,18 @@
+<svg preserveAspectRatio="xMidYMid meet" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="hero-cta-icon-wrapper">
+<rect width="55" height="55" rx="8" fill="url(#paint0_linear_0_4)"/>
+<rect width="55" height="55" rx="8" fill="var(--fill-1, white)"/>
+<path id="hero-cta-icon" d="M29 35L36.5 27.5L29 20M36.5 27.5L18.5 27.5" stroke="#633D00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="-7.93383" y1="27.4775" x2="59.3936" y2="27.4775" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DC7D5A"/>
+<stop offset="0.3" stop-color="#F1A57F"/>
+<stop offset="0.52" stop-color="#FFBE96"/>
+<stop offset="0.62" stop-color="#FBB68F"/>
+<stop offset="0.78" stop-color="#F0A27C"/>
+<stop offset="0.97" stop-color="#DE815E"/>
+<stop offset="0.99" stop-color="#DC7D5A"/>
+</linearGradient>
+</defs>
+</svg>
