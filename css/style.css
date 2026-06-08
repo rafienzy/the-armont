@@ -565,43 +565,52 @@
       max-width: 720px;
     }
 
-    /* scroll-driven enhancement: drift the bg layer and fade content in */
-    @keyframes bgDrift {
-      from { transform: translateY(-16%); }
-      to   { transform: translateY(16%); }
+    /* ----- Spacer 1: pinned background (background-attachment: fixed) -----
+       Plain & rock-solid. The scroll-driven block below DOES NOT touch it. */
+    /* (no extra rules needed — .spacer already sets background-attachment: fixed) */
+
+    /* ----- Spacer 2: scroll-driven drift (more intense), via view() timeline -----
+       Layer is oversized by -34% so the ±28% translate never reveals an edge.
+       overflow:clip on the section (not hidden!) — hidden would create a scroll
+       container and freeze view() progress. */
+    @keyframes bgDriftStrong {
+      from { transform: translateY(-28%) scale(1.05); }
+      to   { transform: translateY(28%)  scale(1.05); }
     }
     @keyframes contentRise {
       from { opacity: 0; transform: translateY(48px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     @supports (animation-timeline: view()) {
-      .parallax-spacer {
+      .parallax-spacer--drift {
         background-image: none !important;
         background-attachment: scroll;
+        overflow: clip;
       }
-      .parallax-spacer__layer {
+      .parallax-spacer--drift .parallax-spacer__layer {
         display: block;
         position: absolute;
-        inset: -20% 0;
+        inset: -34% 0;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
         z-index: 0;
         will-change: transform;
-        animation: bgDrift linear both;
+        animation: bgDriftStrong linear both;
         animation-timeline: view();
         animation-range: cover 0% cover 100%;
       }
-      .parallax-spacer__content {
+      .parallax-spacer--drift .parallax-spacer__content {
         animation: contentRise linear both;
         animation-timeline: view();
         animation-range: entry 15% cover 45%;
       }
     }
     @media (prefers-reduced-motion: reduce) {
-      .parallax-spacer__layer,
-      .parallax-spacer__content { animation: none; }
+      .parallax-spacer--drift .parallax-spacer__layer,
+      .parallax-spacer--drift .parallax-spacer__content { animation: none; }
     }
+    /* iOS / mobile: fixed-attachment is janky, so fall back to a static cover image */
     @media (hover: none), (max-width: 1024px) {
       .spacer { background-attachment: scroll; }
     }
