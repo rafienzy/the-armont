@@ -1108,13 +1108,17 @@
       .section-heading { font-size: 36px; line-height: 44px; }
       .section-subheading { font-size: 34px; line-height: 42px; }
       .spacer__title { font-size: 38px; line-height: 46px; }
-      /* tab width: kill the 180px min-width and let them flex evenly */
-      .tab-group__tabs { gap: 4px; }
-      .tab { width: auto; flex: 1 1 0; min-width: 0; font-size: 14px; padding: 12px 6px; }
+      /* tabs can't all fit at 375px without overlapping — give them their
+         natural width and make the row horizontally scrollable instead */
+      .tab-group { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .tab-group::-webkit-scrollbar { display: none; }
+      .tab-group__tabs { gap: 0; min-width: max-content; }
+      .tab { min-width: 0; padding: 12px 18px; font-size: 14px; }
       .section-facility__img { height: 360px; }
       .unit-card { height: 460px; padding: 24px; }
       .unit-card__specs { gap: 18px; }
-      .floorplan-floors { flex-wrap: wrap; }
+      /* center the floor pills on mobile */
+      .floorplan-floors { flex-wrap: wrap; justify-content: center; }
       /* the 1100px breakpoint puts .floorplan-specs into row direction so the
          title sits next to the spec list — on phones that squeezes the list
          into a sliver. Force a clean stacked column. */
@@ -1122,6 +1126,8 @@
       .floorplan-specs__list { flex-direction: column; gap: 0; }
       .floorplan-spec { flex: 1 1 100%; }
       .pill { padding: 12px 24px; font-size: 16px; }
+      /* chapter cards should fill the column on mobile, not stay at 295px */
+      .siteplan-legend { max-width: none; width: 100%; }
       .site-footer__inner { grid-template-columns: 1fr; gap: 40px; padding-bottom: 32px; }
       .site-footer__cols { grid-template-columns: 1fr 1fr; }
       .contact-form { padding: 24px; }
