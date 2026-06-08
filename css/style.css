@@ -1059,10 +1059,10 @@
     }
 
     .locmap-note {
-      font-size: 12px;
-      color: #8a7d6e;
-      text-align: center;
-      margin-top: -16px;
+      font-size: 11px;
+      color: #a0917f;
+      margin-top: 4px;
+      padding-left: 4px;
     }
 
     @media (max-width: 1100px) {
