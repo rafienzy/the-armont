@@ -180,10 +180,10 @@
         },
         type8: {
           title: 'The Novel Type 8',
-          luas: '153 m²',
+          luas: '120 m²',
           carport: '2',
-          bedroom: '3',
-          bathroom: '2',
+          bedroom: '2',
+          bathroom: '3',
           courtyard: '1',
           avail: '8 UNIT TERSEDIA'
         }
