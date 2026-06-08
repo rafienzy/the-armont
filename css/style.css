@@ -325,7 +325,21 @@
       .nav-logo img { height: 36px; }
       /* shrink the Book CTA so it doesn't dominate a 375px nav row */
       .nav-book { padding: 12px 18px; font-size: 13px; letter-spacing: 0.5px; }
-      .hero__content { padding: 0 20px 48px; gap: 36px; }
+      /* hero content: padding-top clears the fixed nav, padding-bottom gives
+         the CTA buttons room to breathe above the fold. translateY removed so
+         nothing gets clipped off the bottom of a min-height viewport. */
+      .hero__content {
+        padding: 110px 20px 96px;
+        gap: 32px;
+        margin-top: 0;
+        margin-bottom: 0;
+        transform: none;
+        align-items: stretch;
+        justify-content: flex-start;
+      }
+      /* reduce the 95px desktop gap between headline and accordion to
+         something proportional on a 375px screen */
+      .hero-left { gap: 36px; }
       .hero-headline { font-size: 38px; letter-spacing: -1.2px; }
       .hero-accordion { gap: 6px; }
       .acc-img { height: 200px; flex-basis: 64px; min-width: 64px; }
@@ -1208,7 +1222,9 @@
       .section-facility__content { flex-direction: column; gap: 48px; }
       .section-facility__img,
       .section-facility__text-col { width: 100%; }
-      .section-facility__img { height: 480px; }
+      /* flex-basis:0 collapses the image height in column mode — override with
+         flex:none so the explicit height:480px is the definitive size */
+      .section-facility__img { flex: none; height: 480px; aspect-ratio: unset; }
       .section-siteplan { flex-direction: column; gap: 48px; }
       .section-siteplan__text-col { width: 100%; }
       .section-siteplan__map { width: 100%; }
@@ -1233,7 +1249,7 @@
       .tab-group::-webkit-scrollbar { display: none; }
       .tab-group__tabs { gap: 0; min-width: max-content; }
       .tab { min-width: 0; padding: 12px 18px; font-size: 14px; }
-      .section-facility__img { height: 360px; }
+      .section-facility__img { flex: none; height: 320px; }
       .unit-card { height: 460px; padding: 24px; }
       .unit-card__specs { gap: 18px; }
       /* center the floor pills on mobile */
@@ -1249,5 +1265,7 @@
       .siteplan-legend { max-width: none; width: 100%; }
       .site-footer__inner { grid-template-columns: 1fr; gap: 40px; padding-bottom: 32px; }
       .site-footer__cols { grid-template-columns: 1fr 1fr; }
+      /* reduce the gap between heading column and form card on mobile */
+      .contact-section__inner { gap: 36px; }
       .contact-form { padding: 24px; }
     }
