@@ -106,133 +106,146 @@
       applyMode();
     })();
 
-    /* ===================== SITEPLAN interactions ===================== */
+    /* ===================== FACILITY tab interactions ===================== */
     (function () {
-      var groups   = document.querySelectorAll('.sp-group');
-      var legends  = document.querySelectorAll('.sp-legend-item');
-      var tooltip  = document.getElementById('spTooltip');
-      var infoName = document.getElementById('spInfoName');
-      var infoUnits= document.getElementById('spInfoUnits');
-      var infoSize = document.getElementById('spInfoSize');
-      var infoPrice= document.getElementById('spInfoPrice');
-      if (!groups.length || !tooltip) return;
+      var tabs = document.querySelectorAll('[data-facility]');
+      if (!tabs.length) return;
 
-      // update info box
-      function setInfo(name, units, size, price) {
-        infoName.textContent  = name;
-        infoUnits.textContent = units;
-        infoSize.textContent  = size;
-        infoPrice.textContent = price;
+      var img   = document.getElementById('facilityImg');
+      var title = document.getElementById('facilityTitle');
+      var desc  = document.getElementById('facilityDesc');
+      var perks = document.getElementById('facilityPerks');
+
+      var data = {
+        clubhouse: {
+          img: 'asset/facility-clubhouse.png',
+          title: 'Le Gran Clubhouse',
+          desc: 'Klub eksklusif hanya untuk penghuni The Armont — mempertemukan alam dan wellness dalam satu ruang bersama. Didesain sebagai Royal Retreat, tempat keluarga Anda beristirahat dan tumbuh bersama.',
+          perks: ['Swimming Pool', 'Gym', 'Children Playground', 'Multifunction Area']
+        },
+        tudor: {
+          img: 'asset/facility-clubhouse.png',
+          title: 'Tudor Park',
+          desc: 'Ruang hijau yang dirancang untuk keluarga berkumpul, anak-anak bermain, dan komunitas tumbuh. Penuhi sore Anda dengan udara segar dan suara alam.',
+          perks: ['Jogging Track', 'Outdoor Gym', 'Pet Friendly', 'Picnic Area']
+        },
+        graceley: {
+          img: 'asset/facility-clubhouse.png',
+          title: 'Graceley Park',
+          desc: 'Taman tematik dengan area bermain anak, instalasi seni, dan plaza komunitas — tempat Anda menciptakan kenangan keluarga setiap akhir pekan.',
+          perks: ['Kids Playground', 'Art Installation', 'Community Plaza', 'Open Lawn']
+        }
+      };
+
+      function setActive(key) {
+        var d = data[key];
+        if (!d) return;
+        tabs.forEach(function (t) {
+          t.classList.toggle('tab--active', t.dataset.facility === key);
+        });
+        if (img) img.src = d.img;
+        if (title) title.textContent = d.title;
+        if (desc) desc.textContent = d.desc;
+        if (perks) {
+          perks.innerHTML = d.perks.map(function (p) {
+            return '<span class="perk">' + p + '</span>';
+          }).join('');
+        }
       }
 
-      // filter map by type
-      function filter(type) {
-        groups.forEach(function (g) {
-          if (type === 'all' || g.dataset.type === type) {
-            g.classList.remove('sp-dimmed');
-            g.classList.add('sp-highlighted');
-          } else {
-            g.classList.add('sp-dimmed');
-            g.classList.remove('sp-highlighted');
-          }
-        });
-        legends.forEach(function (l) {
-          l.classList.toggle('sp-active', l.dataset.filter === type);
-          l.classList.toggle('sp-all-active', l.dataset.filter === 'all' && type === 'all');
-        });
-      }
-
-      // legend click
-      legends.forEach(function (item) {
-        item.addEventListener('click', function () {
-          var f = item.dataset.filter;
-          filter(f);
-          if (f === 'all') {
-            setInfo('The Armont Residences', '27 unit', '3 tipe', '5M');
-          } else if (f === 'azure') {
-            setInfo('Tipe Azure', '6 unit', '280 m²', 'Mulai Rp 7M');
-          } else if (f === 'onyx') {
-            setInfo('Tipe Onyx', '8 unit', '240 m²', 'Mulai Rp 5.8M');
-          } else {
-            setInfo('Tipe Pearl', '13 unit', '220 m²', 'Mulai Rp 5M');
-          }
-        });
+      tabs.forEach(function (t) {
+        t.addEventListener('click', function () { setActive(t.dataset.facility); });
       });
-
-      // tooltip on house hover
-      groups.forEach(function (g) {
-        g.querySelectorAll('.sp-house').forEach(function (house) {
-          house.addEventListener('mouseenter', function (e) {
-            tooltip.innerHTML = '<b>' + g.dataset.name + '</b><br>Luas ' + g.dataset.size + ' · ' + g.dataset.price;
-            tooltip.classList.add('sp-visible');
-          });
-          house.addEventListener('mousemove', function (e) {
-            tooltip.style.left = (e.clientX + 14) + 'px';
-            tooltip.style.top  = (e.clientY - 36) + 'px';
-          });
-          house.addEventListener('mouseleave', function () {
-            tooltip.classList.remove('sp-visible');
-          });
-        });
-      });
-
-      // start with "all" highlighted
-      filter('all');
     })();
 
     /* ===================== FLOORPLAN interactions ===================== */
     (function () {
       var typeBtns  = document.querySelectorAll('[data-fp-type]');
       var floorBtns = document.querySelectorAll('[data-fp-floor]');
-      var plans     = document.querySelectorAll('.fp-plan');
-      if (!typeBtns.length) return;
+      var plans     = document.querySelectorAll('.fp-img');
+      if (!typeBtns.length || !plans.length) return;
 
-      var curType  = 'azure';
+      var curType  = 'type9';
       var curFloor = '1';
 
       var specs = {
-        azure: { title:'Tipe Azure', luas:'280 m²', kt:'5 KT', km:'4 KM', cp:'2 Mobil', harga:'Rp 7 Miliar', avail:'6 Unit Tersedia' },
-        onyx:  { title:'Tipe Onyx',  luas:'240 m²', kt:'4 KT', km:'3 KM', cp:'2 Mobil', harga:'Rp 5.8 Miliar', avail:'8 Unit Tersedia' },
-        pearl: { title:'Tipe Pearl', luas:'220 m²', kt:'4 KT', km:'3 KM', cp:'1 Mobil', harga:'Rp 5 Miliar', avail:'13 Unit Tersedia' },
+        type9: {
+          title: 'The Novel Type 9',
+          luas: '153 m²',
+          carport: '2',
+          bedroom: '4',
+          bathroom: '4',
+          courtyard: '1',
+          avail: '6 UNIT TERSEDIA'
+        },
+        type8: {
+          title: 'The Novel Type 8',
+          luas: '153 m²',
+          carport: '2',
+          bedroom: '3',
+          bathroom: '2',
+          courtyard: '1',
+          avail: '8 UNIT TERSEDIA'
+        }
       };
 
       function showPlan() {
         plans.forEach(function (p) {
-          p.classList.toggle('fp-visible',
+          p.classList.toggle('fp-img--visible',
             p.dataset.fpType === curType && p.dataset.fpFloor === curFloor);
         });
       }
 
-      function updateSpecs(type) {
-        var s = specs[type];
-        document.getElementById('fpSpecsTitle').textContent = s.title;
-        document.getElementById('fpLuas').textContent       = s.luas;
-        document.getElementById('fpKT').textContent         = s.kt;
-        document.getElementById('fpKM').textContent         = s.km;
-        document.getElementById('fpCP').textContent         = s.cp;
-        document.getElementById('fpHarga').textContent      = s.harga;
-        document.getElementById('fpAvail').textContent      = s.avail;
+      function updateSpecs() {
+        var s = specs[curType];
+        if (!s) return;
+        var el = function (id) { return document.getElementById(id); };
+        if (el('fpSpecTitle')) el('fpSpecTitle').textContent = s.title;
+        if (el('fpLuas')) el('fpLuas').textContent = s.luas;
+        if (el('fpCarport')) el('fpCarport').textContent = s.carport;
+        if (el('fpBedroom')) el('fpBedroom').textContent = s.bedroom;
+        if (el('fpBathroom')) el('fpBathroom').textContent = s.bathroom;
+        if (el('fpCourtyard')) el('fpCourtyard').textContent = s.courtyard;
+        if (el('fpAvail')) el('fpAvail').textContent = s.avail;
       }
 
       typeBtns.forEach(function (btn) {
-        if (!btn.dataset.fpType) return;   // skip floor buttons
         btn.addEventListener('click', function () {
           curType = btn.dataset.fpType;
-          typeBtns.forEach(function (b) { b.classList.toggle('fp-active', b.dataset.fpType === curType); });
+          typeBtns.forEach(function (b) {
+            b.classList.toggle('tab--active', b.dataset.fpType === curType);
+          });
           showPlan();
-          updateSpecs(curType);
+          updateSpecs();
         });
       });
 
       floorBtns.forEach(function (btn) {
-        if (!btn.dataset.fpFloor) return;  // skip type buttons
         btn.addEventListener('click', function () {
           curFloor = btn.dataset.fpFloor;
-          floorBtns.forEach(function (b) { b.classList.toggle('fp-active', b.dataset.fpFloor === curFloor); });
+          floorBtns.forEach(function (b) {
+            b.classList.toggle('pill--active', b.dataset.fpFloor === curFloor);
+          });
           showPlan();
         });
       });
 
       showPlan();
-      updateSpecs(curType);
+      updateSpecs();
+    })();
+
+    /* ===================== SITEPLAN legend hover ===================== */
+    (function () {
+      var map = document.getElementById('siteplanMap');
+      if (!map) return;
+      var items = document.querySelectorAll('.siteplan-legend__item[data-chapter]');
+      items.forEach(function (it) {
+        var ch = it.dataset.chapter;
+        function show() { map.classList.add('sp-show-' + ch); }
+        function hide() { map.classList.remove('sp-show-' + ch); }
+        it.addEventListener('mouseenter', show);
+        it.addEventListener('mouseleave', hide);
+        it.addEventListener('focus', show);
+        it.addEventListener('blur', hide);
+      });
     })();
