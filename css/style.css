@@ -319,11 +319,25 @@
       }
       .topbar .navbar { display: none; }
       .topbar .nav-logo { justify-self: start; }
-      .nav-logo img { height: 40px; }
+      /* over the hero the nav-logo would clash with the hero badge — hide it
+         until the bar is scrolled into its solid state */
+      .site-nav:not(.is-scrolled) .nav-logo { display: none; }
+      .nav-logo img { height: 36px; }
+      /* shrink the Book CTA so it doesn't dominate a 375px nav row */
+      .nav-book { padding: 12px 18px; font-size: 13px; letter-spacing: 0.5px; }
       .hero__content { padding: 0 20px 48px; gap: 36px; }
       .hero-headline { font-size: 38px; letter-spacing: -1.2px; }
       .hero-accordion { gap: 6px; }
       .acc-img { height: 200px; flex-basis: 64px; min-width: 64px; }
+    }
+
+    /* keep the nav legible on bright hero photos (tablet hero crops a lot of
+       sky into the nav strip) — readable shadow only while transparent */
+    .site-nav:not(.is-scrolled) .nav-item {
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 2px 14px rgba(0, 0, 0, 0.35);
+    }
+    .site-nav:not(.is-scrolled) .nav-logo img {
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
     }
 
     /* ===================== SHARED SECTION TYPOGRAPHY ===================== */
@@ -337,7 +351,7 @@
       color: #3d1c00;
     }
     .section-heading--center { text-align: center; }
-    .section-heading--wide { max-width: none; white-space: nowrap; }
+    .section-heading--wide { max-width: none; }
     .section-heading .accent { color: #c8723a; }
 
     .section-subheading {
@@ -346,7 +360,6 @@
       line-height: 1.15;
       letter-spacing: -1.1px;
       color: #3d1c00;
-      white-space: nowrap;
     }
 
     .section-paragraph {
@@ -1095,11 +1108,19 @@
       .section-heading { font-size: 36px; line-height: 44px; }
       .section-subheading { font-size: 34px; line-height: 42px; }
       .spacer__title { font-size: 38px; line-height: 46px; }
-      .tab { width: auto; flex: 1; font-size: 15px; padding: 12px 8px; }
+      /* tab width: kill the 180px min-width and let them flex evenly */
+      .tab-group__tabs { gap: 4px; }
+      .tab { width: auto; flex: 1 1 0; min-width: 0; font-size: 14px; padding: 12px 6px; }
       .section-facility__img { height: 360px; }
       .unit-card { height: 460px; padding: 24px; }
       .unit-card__specs { gap: 18px; }
       .floorplan-floors { flex-wrap: wrap; }
+      /* the 1100px breakpoint puts .floorplan-specs into row direction so the
+         title sits next to the spec list — on phones that squeezes the list
+         into a sliver. Force a clean stacked column. */
+      .floorplan-specs { flex-direction: column; gap: 8px; }
+      .floorplan-specs__list { flex-direction: column; gap: 0; }
+      .floorplan-spec { flex: 1 1 100%; }
       .pill { padding: 12px 24px; font-size: 16px; }
       .site-footer__inner { grid-template-columns: 1fr; gap: 40px; padding-bottom: 32px; }
       .site-footer__cols { grid-template-columns: 1fr 1fr; }
