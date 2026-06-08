@@ -124,13 +124,13 @@
           perks: ['Swimming Pool', 'Gym', 'Children Playground', 'Multifunction Area']
         },
         tudor: {
-          img: 'asset/facility-clubhouse.webp',
+          img: 'asset/tudor-park.webp',
           title: 'Tudor Park',
           desc: 'Ruang hijau yang dirancang untuk keluarga berkumpul, anak-anak bermain, dan komunitas tumbuh. Penuhi sore Anda dengan udara segar dan suara alam.',
           perks: ['Jogging Track', 'Outdoor Gym', 'Pet Friendly', 'Picnic Area']
         },
         graceley: {
-          img: 'asset/facility-clubhouse.webp',
+          img: 'asset/graceley-park.webp',
           title: 'Graceley Park',
           desc: 'Taman tematik dengan area bermain anak, instalasi seni, dan plaza komunitas — tempat Anda menciptakan kenangan keluarga setiap akhir pekan.',
           perks: ['Kids Playground', 'Art Installation', 'Community Plaza', 'Open Lawn']
