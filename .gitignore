@@ -9,5 +9,5 @@ screenshot.png
 make_pdf.py
 *.pdf
 
-# Original PNG exports — superseded by optimized .webp
-asset/*.png
+# Archived PNG exports — kept locally only (superseded by optimized .webp)
+asset/temp_delete/
