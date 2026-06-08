@@ -1024,15 +1024,16 @@
       align-content: start;
     }
     .locmap-card {
-      background: #ede4d3;
+      background: #fff;
+      border: 0.5px solid #633D00;
       border-radius: 12px;
-      padding: 14px 18px;
+      padding: 22px 22px;
       display: flex;
       align-items: center;
       gap: 14px;
-      transition: background 0.2s ease;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
-    .locmap-card:hover { background: #e4d8c2; }
+    .locmap-card:hover { background: #fdf7ee; border-color: #3d1c00; }
     .locmap-card__pin {
       flex: 0 0 auto;
       width: 22px;
@@ -1073,7 +1074,7 @@
       .section-locmap { padding: 72px 20px; }
       .section-locmap__inner { gap: 36px; }
       .locmap-mapwrap { min-height: 320px; border-radius: 14px; }
-      .locmap-card { padding: 13px 16px; }
+      .locmap-card { padding: 20px 18px; }
     }
 
     /* ===================== CONTACT ===================== */
