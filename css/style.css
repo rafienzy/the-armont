@@ -324,7 +324,7 @@
       .site-nav:not(.is-scrolled) .nav-logo { display: none; }
       .nav-logo img { height: 36px; }
       /* shrink the Book CTA — remove inherited 55px height so it auto-sizes */
-      .nav-book { height: auto; padding: 10px 16px; font-size: 12px; letter-spacing: 0.5px; }
+      .nav-book { height: auto; padding: 13px 16px; font-size: 12px; letter-spacing: 0.5px; }
       /* hero content: padding-top clears the fixed nav, padding-bottom gives
          the CTA buttons room to breathe above the fold */
       .hero__content {
