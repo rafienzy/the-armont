@@ -1274,6 +1274,9 @@
       .site-footer__inner { grid-template-columns: 1fr; gap: 40px; padding-bottom: 32px; }
       .site-footer__cols { grid-template-columns: 1fr 1fr; }
       /* reduce the gap between heading column and form card on mobile */
-      .contact-section__inner { gap: 36px; }
-      .contact-form { padding: 24px; width: 100%; }
+      .contact-section { overflow: hidden; }
+      .contact-section__inner { gap: 36px; display: flex; flex-direction: column; width: 100%; }
+      .contact-form { padding: 24px; width: 100%; min-width: 0; box-sizing: border-box; }
+      .contact-field input,
+      .contact-field select { width: 100%; min-width: 0; box-sizing: border-box; }
     }
