@@ -26,6 +26,7 @@
       background: var(--cream);
       color: #fff;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     img { display: block; max-width: 100%; }
@@ -309,13 +310,12 @@
     }
 
     @media (max-width: 720px) {
-      /* no pinning on phones — hero scrolls normally */
-      .hero { position: static; height: auto; min-height: 100svh; }
-      /* simple 2-zone bar on phones: logo left, CTA right (links need a
-         hamburger menu — to be designed with the rest of the mobile view) */
+      /* hero fills exactly one screen on phones */
+      .hero { position: static; height: 100svh; overflow: hidden; }
+      /* simple 2-zone bar on phones: logo left, CTA right */
       .topbar {
         grid-template-columns: 1fr auto;
-        padding: 20px;
+        padding: 14px 20px;
       }
       .topbar .navbar { display: none; }
       .topbar .nav-logo { justify-self: start; }
@@ -323,26 +323,26 @@
          until the bar is scrolled into its solid state */
       .site-nav:not(.is-scrolled) .nav-logo { display: none; }
       .nav-logo img { height: 36px; }
-      /* shrink the Book CTA so it doesn't dominate a 375px nav row */
-      .nav-book { padding: 12px 18px; font-size: 13px; letter-spacing: 0.5px; }
+      /* shrink the Book CTA — remove inherited 55px height so it auto-sizes */
+      .nav-book { height: auto; padding: 10px 16px; font-size: 12px; letter-spacing: 0.5px; }
       /* hero content: padding-top clears the fixed nav, padding-bottom gives
-         the CTA buttons room to breathe above the fold. translateY removed so
-         nothing gets clipped off the bottom of a min-height viewport. */
+         the CTA buttons room to breathe above the fold */
       .hero__content {
-        padding: 110px 20px 96px;
-        gap: 32px;
+        padding: 96px 20px 80px;
+        gap: 28px;
         margin-top: 0;
         margin-bottom: 0;
         transform: none;
         align-items: stretch;
         justify-content: flex-start;
       }
-      /* reduce the 95px desktop gap between headline and accordion to
-         something proportional on a 375px screen */
-      .hero-left { gap: 36px; }
+      /* smaller badge/logo in the hero so content fits within 100svh */
+      .hero-badge { height: 40px; }
+      /* tighten gaps to recover vertical space */
+      .hero-left { gap: 28px; }
       .hero-headline { font-size: 38px; letter-spacing: -1.2px; }
       .hero-accordion { gap: 6px; }
-      .acc-img { height: 200px; flex-basis: 64px; min-width: 64px; }
+      .acc-img { height: 180px; flex-basis: 64px; min-width: 64px; }
     }
 
     /* keep the nav legible on bright hero photos (tablet hero crops a lot of
@@ -1267,5 +1267,5 @@
       .site-footer__cols { grid-template-columns: 1fr 1fr; }
       /* reduce the gap between heading column and form card on mobile */
       .contact-section__inner { gap: 36px; }
-      .contact-form { padding: 24px; }
+      .contact-form { padding: 24px; width: 100%; }
     }
