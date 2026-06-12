@@ -13,18 +13,39 @@
   <!-- Fixed site navigation: links left · logo center · CTA right, hides on scroll down -->
   <header class="site-nav" id="siteNav">
     <div class="topbar">
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+
       <nav class="navbar" aria-label="Primary">
         <a href="#home" class="nav-item nav-item--active">Home</a>
-        <a href="#type" class="nav-item">Type</a>
-        <a href="#promo" class="nav-item">Promo</a>
-        <a href="#gallery" class="nav-item">Gallery</a>
+        <a href="#about" class="nav-item">About</a>
+        <a href="#location" class="nav-item">Location</a>
+        <a href="#facility" class="nav-item">Facilities</a>
+        <a href="#type" class="nav-item">Unit Type</a>
       </nav>
 
       <a href="#home" class="nav-logo" aria-label="The Armont Residences">
         <img src="asset/nav-logo.svg" alt="The Armont Residences logo" />
       </a>
 
-      <a href="#book" class="btn nav-book">BOOK SEKARANG</a>
+      <a href="#book" class="btn nav-book">
+        <span class="nav-book__full">PILIH UNIT SEKARANG</span>
+        <span class="nav-book__short">PILIH UNIT</span>
+      </a>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <button type="button" class="mobile-menu__close" id="navClose" aria-label="Tutup menu">
+        <span></span><span></span>
+      </button>
+      <nav class="mobile-menu__nav" aria-label="Mobile">
+        <a href="#home" class="mobile-menu__item">Home</a>
+        <a href="#about" class="mobile-menu__item">About</a>
+        <a href="#location" class="mobile-menu__item">Location</a>
+        <a href="#facility" class="mobile-menu__item">Facilities</a>
+        <a href="#type" class="mobile-menu__item">Unit Type</a>
+      </nav>
     </div>
   </header>
 
@@ -42,22 +63,11 @@
             <img src="asset/badge-2.svg" alt="" />
           </div>
           <h1 class="hero-headline">
-            Rumah mewah<br />
-            3 Lantai. Mulai 5M&#8209;an
+            Rumah mewah 2 lantai di BSD CITY.<br />
+            Mulai dari Rp 4 M&#8209;an
           </h1>
         </div>
 
-        <div class="hero-accordion">
-          <div class="acc-img acc-img--primary is-active" data-default>
-            <img src="asset/accordion-img-1.webp" alt="Tampak depan rumah mewah The Armont" />
-          </div>
-          <div class="acc-img acc-img--narrow">
-            <img src="asset/accordion-img-2.webp" alt="Detail eksterior rumah The Armont" />
-          </div>
-          <div class="acc-img acc-img--narrow">
-            <img src="asset/accordion-img-3.webp" alt="Galeri rumah The Armont" />
-          </div>
-        </div>
       </div>
 
       <div class="hero-right">
@@ -104,178 +114,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ===================== FACILITY ===================== -->
-  <section class="section-facility" id="facility">
-    <div class="section-facility__inner">
-      <div class="section-facility__header">
-        <h2 class="section-heading">Fasilitas Publik Untuk<br/>Dinikmati Keluarga</h2>
-        <div class="tab-group">
-          <div class="tab-group__tabs" id="facilityTabs">
-            <button type="button" class="tab tab--active" data-facility="clubhouse">Le Gran Clubhouse</button>
-            <button type="button" class="tab" data-facility="tudor">Tudor Park</button>
-            <button type="button" class="tab" data-facility="graceley">Graceley Park</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-facility__content">
-        <div class="section-facility__img">
-          <img id="facilityImg" src="asset/facility-clubhouse.webp" alt="Le Gran Clubhouse" />
-        </div>
-        <div class="section-facility__text-col">
-          <h3 class="section-subheading" id="facilityTitle">Le Gran Clubhouse</h3>
-          <p class="section-paragraph" id="facilityDesc">Klub eksklusif hanya untuk penghuni The Armont — mempertemukan alam dan wellness dalam satu ruang bersama. Didesain sebagai Royal Retreat, tempat keluarga Anda beristirahat dan tumbuh bersama.</p>
-          <div class="perks" id="facilityPerks">
-            <span class="perk">Swimming Pool</span>
-            <span class="perk">Gym</span>
-            <span class="perk">Children Playground</span>
-            <span class="perk">Multifunction Area</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SPACER 1 (parallax: pinned background) ===================== -->
-  <section class="spacer parallax-spacer parallax-spacer--pinned" id="promo" style="background-image: url('asset/spacer-1.webp');">
-    <div class="parallax-spacer__layer" style="background-image: url('asset/spacer-1.webp');"></div>
-    <div class="parallax-spacer__overlay"></div>
-    <div class="parallax-spacer__content">
-      <p class="spacer__eyebrow">THE ARMONT RESIDENCES</p>
-      <h2 class="spacer__title">Tinggal di tengah ketenangan, dekat dengan segalanya</h2>
-      <p class="spacer__text">Kami merangkul kebutuhan gaya hidup modern dengan konsep kehidupan<br/>premium yang harmonis dengan alam dan komunitas.</p>
-    </div>
-  </section>
-
-  <!-- ===================== UNIT TYPES ===================== -->
-  <section class="section-unit-types" id="type">
-    <div class="section-unit-types__inner">
-      <div class="section-unit-types__header">
-        <h2 class="section-heading section-heading--center section-heading--wide">The <span class="accent">Novel</span> Type 8 &amp; Type 9</h2>
-        <p class="section-paragraph section-paragraph--center">Dua tipe rumah untuk setiap fase kehidupan keluarga modern — dari keluarga muda hingga keluarga berkembang, semua terpenuhi.</p>
-      </div>
-      <div class="unit-cards">
-        <article class="unit-card" style="background-image: url('asset/novel-t9.webp');">
-          <div class="unit-card__overlay"></div>
-          <div class="unit-card__body">
-            <h3 class="unit-card__title">The Novel Type 9</h3>
-            <div class="unit-card__specs">
-              <div><b>153 m²</b><span>Luas Tanah</span></div>
-              <div><b>200 m²</b><span>Luas Bangunan</span></div>
-              <div><b>3 Lantai</b><span>Lantai</span></div>
-            </div>
-            <div class="unit-card__pill">
-              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-3a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v3"/><path d="M3 18h18"/><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/></svg> 4</span>
-              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M5 12V8a2 2 0 0 1 2-2h2"/><path d="M5 16v2"/><path d="M19 16v2"/><path d="M3 16h18"/></svg> 4</span>
-              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14"/><path d="M7 17V8h10v9"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg> 2</span>
-            </div>
-          </div>
-        </article>
-        <article class="unit-card" style="background-image: url('asset/novel-t8.webp');">
-          <div class="unit-card__overlay"></div>
-          <div class="unit-card__body">
-            <h3 class="unit-card__title">The Novel Type 8</h3>
-            <div class="unit-card__specs">
-              <div><b>120 m²</b><span>Luas Tanah</span></div>
-              <div><b>158 m²</b><span>Luas Bangunan</span></div>
-              <div><b>3 Lantai</b><span>Lantai</span></div>
-            </div>
-            <div class="unit-card__pill">
-              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-3a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v3"/><path d="M3 18h18"/><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/></svg> 4</span>
-              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M5 12V8a2 2 0 0 1 2-2h2"/><path d="M5 16v2"/><path d="M19 16v2"/><path d="M3 16h18"/></svg> 3</span>
-              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14"/><path d="M7 17V8h10v9"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg> 2</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SITEPLAN ===================== -->
-  <section class="section-siteplan" id="siteplan">
-    <div class="section-siteplan__text-col">
-      <h2 class="section-heading">Jelajahi Kawasan<br/>The Armont</h2>
-      <p class="section-paragraph">Temukan posisi ideal unit Anda di dalam kawasan The Armont Residences. Chapter I telah habis terjual — Chapter II kini terbuka untuk Anda.</p>
-      <div class="siteplan-legend">
-        <div class="siteplan-legend__item siteplan-legend__item--chapter1" data-chapter="1">
-          <div class="siteplan-legend__row">
-            <span class="siteplan-legend__label"><span class="siteplan-legend__dot" style="background:#ff6b35;"></span>Chapter I</span>
-            <span class="siteplan-legend__status">SOLD OUT</span>
-          </div>
-        </div>
-        <div class="siteplan-legend__item siteplan-legend__item--chapter2" data-chapter="2">
-          <div class="siteplan-legend__row">
-            <span class="siteplan-legend__label"><span class="siteplan-legend__dot" style="background:#2ecc40;"></span>Chapter II</span>
-            <span class="siteplan-legend__status">NOW OPEN<br/>FOR SALE</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section-siteplan__map" id="siteplanMap">
-      <img src="asset/siteplan-map.webp" alt="Peta kawasan The Armont" />
-      <!-- Chapter I rectangles — positions taken directly from Figma node 23:5690 -->
-      <div class="sp-block sp-block--chapter1" style="--l:71.875%;--t:9.657%;--w:22.690%;--h:7.944%"><span>SOLD OUT</span></div>
-      <div class="sp-block sp-block--chapter1" style="--l:71.875%;--t:19.626%;--w:17.120%;--h:7.944%"><span>SOLD OUT</span></div>
-      <div class="sp-block sp-block--chapter1" style="--l:71.875%;--t:29.595%;--w:18.614%;--h:7.944%"><span>SOLD OUT</span></div>
-      <div class="sp-block sp-block--chapter1" style="--l:71.875%;--t:39.564%;--w:18.614%;--h:9.346%"><span>SOLD OUT</span></div>
-      <!-- Chapter II rectangles -->
-      <div class="sp-block sp-block--chapter2" style="--l:71.875%;--t:54.984%;--w:17.120%;--h:9.346%"><span>AVAILABLE</span></div>
-      <div class="sp-block sp-block--chapter2" style="--l:71.875%;--t:66.978%;--w:15.489%;--h:7.944%"><span>AVAILABLE</span></div>
-      <div class="sp-block sp-block--chapter2" style="--l:71.875%;--t:76.947%;--w:13.315%;--h:7.944%"><span>AVAILABLE</span></div>
-      <div class="sp-block sp-block--chapter2" style="--l:71.875%;--t:86.916%;--w:13.315%;--h:7.944%"><span>AVAILABLE</span></div>
-      <div class="sp-block sp-block--chapter2 sp-block--badge" style="--l:85.870%;--t:88.162%;--w:6.658%;--h:5.140%"></div>
-    </div>
-  </section>
-
-  <!-- ===================== FLOORPLAN ===================== -->
-  <section class="section-floorplan" id="floorplan">
-    <h2 class="section-heading section-heading--center">The Armont Floor Plan</h2>
-
-    <div class="tab-group tab-group--center">
-      <div class="tab-group__tabs">
-        <button type="button" class="tab tab--active" data-fp-type="type9">The Novel Type 9</button>
-        <button type="button" class="tab" data-fp-type="type8">The Novel Type 8</button>
-      </div>
-    </div>
-
-    <div class="section-floorplan__content">
-      <div class="floorplan-floors">
-        <button type="button" class="pill pill--active" data-fp-floor="1">Lantai 1</button>
-        <button type="button" class="pill" data-fp-floor="2">Lantai 2</button>
-      </div>
-
-      <div class="floorplan-plan">
-        <img class="fp-img fp-img--visible" data-fp-type="type9" data-fp-floor="1" src="asset/section-floorplan__plan-img-T9-1f.webp" alt="Floor plan Type 9 — Lantai 1" />
-        <img class="fp-img" data-fp-type="type9" data-fp-floor="2" src="asset/section-floorplan__plan-img-T9-2f.webp" alt="Floor plan Type 9 — Lantai 2" />
-        <img class="fp-img" data-fp-type="type8" data-fp-floor="1" src="asset/section-floorplan__plan-img-T8-1f.webp" alt="Floor plan Type 8 — Lantai 1" />
-        <img class="fp-img" data-fp-type="type8" data-fp-floor="2" src="asset/section-floorplan__plan-img-T8-2f.webp" alt="Floor plan Type 8 — Lantai 2" />
-      </div>
-
-      <aside class="floorplan-specs" id="floorplanSpecs">
-        <h3 class="floorplan-specs__title" id="fpSpecTitle">The Novel Type 9</h3>
-        <div class="floorplan-specs__list">
-          <div class="floorplan-spec"><span class="floorplan-spec__label">Luas Tanah</span><span class="floorplan-spec__value" id="fpLuas">153 m²</span></div>
-          <div class="floorplan-spec"><span class="floorplan-spec__label">Carports</span><span class="floorplan-spec__value" id="fpCarport">2</span></div>
-          <div class="floorplan-spec"><span class="floorplan-spec__label">Ensuite Bedroom</span><span class="floorplan-spec__value" id="fpBedroom">4</span></div>
-          <div class="floorplan-spec"><span class="floorplan-spec__label">Bathroom</span><span class="floorplan-spec__value" id="fpBathroom">4</span></div>
-          <div class="floorplan-spec"><span class="floorplan-spec__label">Inner Courtyard</span><span class="floorplan-spec__value" id="fpCourtyard">1</span></div>
-          <div class="floorplan-spec floorplan-spec--last"><span class="floorplan-spec__label">KETERSEDIAAN UNIT</span><span class="floorplan-spec__value" id="fpAvail">6 UNIT TERSEDIA</span></div>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- ===================== SPACER 2 (parallax: scroll-driven drift) ===================== -->
-  <section class="spacer parallax-spacer parallax-spacer--drift" style="background-image: url('asset/spacer-2.webp');">
-    <div class="parallax-spacer__layer" style="background-image: url('asset/spacer-2.webp');"></div>
-    <div class="parallax-spacer__overlay"></div>
-    <div class="parallax-spacer__content">
-      <p class="spacer__eyebrow">CHAPTER 2 NOW OPEN</p>
-      <h2 class="spacer__title">Chapter 1 sudah terjual habis.<br/>Jangan lewatkan yang kedua.</h2>
-      <p class="spacer__text">Lebih dari 30 keluarga telah memilih Armont sebagai rumah mereka. Kini Chapter 2 hadir<br/>dengan tipe terbaru dan unit terbatas — pilih sebelum tetangga Anda yang melakukannya.</p>
     </div>
   </section>
 
@@ -332,6 +170,163 @@
           <p class="locmap-note">*Estimasi waktu tempuh dengan mobil pribadi, di luar jam sibuk.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===================== FACILITY ===================== -->
+  <section class="section-facility" id="facility">
+    <div class="section-facility__inner">
+      <div class="section-facility__header">
+        <h2 class="section-heading">Fasilitas Publik Untuk<br/>Dinikmati Keluarga</h2>
+        <div class="tab-group">
+          <div class="tab-group__tabs" id="facilityTabs">
+            <button type="button" class="tab tab--active" data-facility="clubhouse">Le Gran Clubhouse</button>
+            <button type="button" class="tab" data-facility="tudor">Tudor Park</button>
+            <button type="button" class="tab" data-facility="graceley">Graceley Park</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-facility__content">
+        <div class="section-facility__img">
+          <img id="facilityImg" src="asset/facility-clubhouse.webp" alt="Le Gran Clubhouse" />
+        </div>
+        <div class="section-facility__text-col">
+          <h3 class="section-subheading" id="facilityTitle">Le Gran Clubhouse</h3>
+          <p class="section-paragraph" id="facilityDesc">Klub eksklusif hanya untuk penghuni The Armont — mempertemukan alam dan wellness dalam satu ruang bersama. Didesain sebagai Royal Retreat, tempat keluarga Anda beristirahat dan tumbuh bersama.</p>
+          <div class="perks" id="facilityPerks">
+            <span class="perk">Swimming Pool</span>
+            <span class="perk">Gym</span>
+            <span class="perk">Children Playground</span>
+            <span class="perk">Multifunction Area</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== UNIT TYPES ===================== -->
+  <section class="section-unit-types" id="type">
+    <div class="section-unit-types__inner">
+      <div class="section-unit-types__header">
+        <h2 class="section-heading section-heading--center section-heading--wide">The <span class="accent">Novel</span> Type 8 &amp; Type 9</h2>
+        <p class="section-paragraph section-paragraph--center">Dua tipe rumah untuk setiap fase kehidupan keluarga modern — dari keluarga muda hingga keluarga berkembang, semua terpenuhi.</p>
+      </div>
+      <div class="unit-cards">
+        <article class="unit-card" style="background-image: url('asset/novel-t9.webp');">
+          <div class="unit-card__overlay"></div>
+          <div class="unit-card__body">
+            <h3 class="unit-card__title">The Novel Type 9</h3>
+            <div class="unit-card__specs">
+              <div><b>153 m²</b><span>Luas Tanah</span></div>
+              <div><b>200 m²</b><span>Luas Bangunan</span></div>
+              <div><b>3 Lantai</b><span>Lantai</span></div>
+            </div>
+            <div class="unit-card__pill">
+              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-3a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v3"/><path d="M3 18h18"/><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/></svg> 4</span>
+              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M5 12V8a2 2 0 0 1 2-2h2"/><path d="M5 16v2"/><path d="M19 16v2"/><path d="M3 16h18"/></svg> 4</span>
+              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14"/><path d="M7 17V8h10v9"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg> 2</span>
+            </div>
+          </div>
+        </article>
+        <article class="unit-card" style="background-image: url('asset/novel-t8.webp');">
+          <div class="unit-card__overlay"></div>
+          <div class="unit-card__body">
+            <h3 class="unit-card__title">The Novel Type 8</h3>
+            <div class="unit-card__specs">
+              <div><b>120 m²</b><span>Luas Tanah</span></div>
+              <div><b>158 m²</b><span>Luas Bangunan</span></div>
+              <div><b>3 Lantai</b><span>Lantai</span></div>
+            </div>
+            <div class="unit-card__pill">
+              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-3a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v3"/><path d="M3 18h18"/><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/></svg> 4</span>
+              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M5 12V8a2 2 0 0 1 2-2h2"/><path d="M5 16v2"/><path d="M19 16v2"/><path d="M3 16h18"/></svg> 3</span>
+              <span class="pill-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14"/><path d="M7 17V8h10v9"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg> 2</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FLOORPLAN ===================== -->
+  <section class="section-floorplan" id="floorplan">
+    <h2 class="section-heading section-heading--center">The Armont Floor Plan</h2>
+
+    <div class="tab-group tab-group--center">
+      <div class="tab-group__tabs">
+        <button type="button" class="tab tab--active" data-fp-type="type9">The Novel Type 9</button>
+        <button type="button" class="tab" data-fp-type="type8">The Novel Type 8</button>
+      </div>
+    </div>
+
+    <div class="section-floorplan__content">
+      <div class="floorplan-plan">
+        <figure class="fp-slot fp-slot--visible" data-fp-type="type9" data-fp-floor="1">
+          <img class="fp-img" src="asset/section-floorplan__plan-img-T9-1f.webp" alt="Floor plan Type 9 — Lantai 1" />
+          <figcaption class="fp-slot__caption">Lantai 1</figcaption>
+        </figure>
+        <figure class="fp-slot fp-slot--visible" data-fp-type="type9" data-fp-floor="2">
+          <img class="fp-img" src="asset/section-floorplan__plan-img-T9-2f.webp" alt="Floor plan Type 9 — Lantai 2" />
+          <figcaption class="fp-slot__caption">Lantai 2</figcaption>
+        </figure>
+        <figure class="fp-slot" data-fp-type="type8" data-fp-floor="1">
+          <img class="fp-img" src="asset/section-floorplan__plan-img-T8-1f.webp" alt="Floor plan Type 8 — Lantai 1" />
+          <figcaption class="fp-slot__caption">Lantai 1</figcaption>
+        </figure>
+        <figure class="fp-slot" data-fp-type="type8" data-fp-floor="2">
+          <img class="fp-img" src="asset/section-floorplan__plan-img-T8-2f.webp" alt="Floor plan Type 8 — Lantai 2" />
+          <figcaption class="fp-slot__caption">Lantai 2</figcaption>
+        </figure>
+      </div>
+
+      <aside class="floorplan-specs" id="floorplanSpecs">
+        <h3 class="floorplan-specs__title" id="fpSpecTitle">The Novel Type 9</h3>
+        <div class="floorplan-specs__list">
+          <div class="floorplan-spec"><span class="floorplan-spec__label">Luas Tanah</span><span class="floorplan-spec__value" id="fpLuas">153 m²</span></div>
+          <div class="floorplan-spec"><span class="floorplan-spec__label">Carports</span><span class="floorplan-spec__value" id="fpCarport">2</span></div>
+          <div class="floorplan-spec"><span class="floorplan-spec__label">Ensuite Bedroom</span><span class="floorplan-spec__value" id="fpBedroom">4</span></div>
+          <div class="floorplan-spec"><span class="floorplan-spec__label">Bathroom</span><span class="floorplan-spec__value" id="fpBathroom">4</span></div>
+          <div class="floorplan-spec"><span class="floorplan-spec__label">Inner Courtyard</span><span class="floorplan-spec__value" id="fpCourtyard">1</span></div>
+          <div class="floorplan-spec floorplan-spec--last"><span class="floorplan-spec__label">KETERSEDIAAN UNIT</span><span class="floorplan-spec__value" id="fpAvail">6 UNIT TERSEDIA</span></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== SITEPLAN ===================== -->
+  <section class="section-siteplan" id="siteplan">
+    <div class="section-siteplan__text-col">
+      <h2 class="section-heading">Jelajahi Kawasan<br/>The Armont</h2>
+      <p class="section-paragraph">Temukan posisi ideal unit Anda di dalam kawasan The Armont Residences. Chapter I telah habis terjual — Chapter II kini terbuka untuk Anda.</p>
+      <div class="siteplan-legend">
+        <div class="siteplan-legend__item siteplan-legend__item--chapter1" data-chapter="1">
+          <div class="siteplan-legend__row">
+            <span class="siteplan-legend__label"><span class="siteplan-legend__dot" style="background:#ff6b35;"></span>Chapter I</span>
+            <span class="siteplan-legend__status">SOLD OUT</span>
+          </div>
+        </div>
+        <div class="siteplan-legend__item siteplan-legend__item--chapter2" data-chapter="2">
+          <div class="siteplan-legend__row">
+            <span class="siteplan-legend__label"><span class="siteplan-legend__dot" style="background:#2ecc40;"></span>Chapter II</span>
+            <span class="siteplan-legend__status">NOW OPEN<br/>FOR SALE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section-siteplan__map" id="siteplanMap">
+      <img src="asset/siteplan-map.webp" alt="Peta kawasan The Armont" />
+      <!-- Chapter I rectangles — positions taken directly from Figma node 23:5690 -->
+      <div class="sp-block sp-block--chapter1" style="--l:71.875%;--t:9.657%;--w:22.690%;--h:7.944%"><span>SOLD OUT</span></div>
+      <div class="sp-block sp-block--chapter1" style="--l:71.875%;--t:19.626%;--w:17.120%;--h:7.944%"><span>SOLD OUT</span></div>
+      <div class="sp-block sp-block--chapter1" style="--l:71.875%;--t:29.595%;--w:18.614%;--h:7.944%"><span>SOLD OUT</span></div>
+      <div class="sp-block sp-block--chapter1" style="--l:71.875%;--t:39.564%;--w:18.614%;--h:9.346%"><span>SOLD OUT</span></div>
+      <!-- Chapter II rectangles -->
+      <div class="sp-block sp-block--chapter2" style="--l:71.875%;--t:54.984%;--w:17.120%;--h:9.346%"><span>AVAILABLE</span></div>
+      <div class="sp-block sp-block--chapter2" style="--l:71.875%;--t:66.978%;--w:15.489%;--h:7.944%"><span>AVAILABLE</span></div>
+      <div class="sp-block sp-block--chapter2" style="--l:71.875%;--t:76.947%;--w:13.315%;--h:7.944%"><span>AVAILABLE</span></div>
+      <div class="sp-block sp-block--chapter2" style="--l:71.875%;--t:86.916%;--w:13.315%;--h:7.944%"><span>AVAILABLE</span></div>
+      <div class="sp-block sp-block--chapter2 sp-block--badge" style="--l:85.870%;--t:88.162%;--w:6.658%;--h:5.140%"></div>
     </div>
   </section>
 

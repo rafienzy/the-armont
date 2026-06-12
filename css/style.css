@@ -122,6 +122,11 @@
     .topbar .navbar { justify-self: start; }
     .topbar .nav-logo { justify-self: center; }
     .topbar .nav-book { justify-self: end; }
+    .nav-book__short { display: none; }
+    @media (max-width: 1100px) {
+      .nav-book__full { display: none; }
+      .nav-book__short { display: inline; }
+    }
 
     /* clean text links with an underline that grows on hover */
     .navbar {
@@ -159,6 +164,94 @@
     .nav-logo { display: inline-flex; }
     .nav-logo img { height: 52px; width: auto; transition: height 0.35s ease; }
 
+    /* ---------- Hamburger (mobile only) ---------- */
+    .nav-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      justify-self: start;
+    }
+    .nav-toggle span {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.2s ease, top 0.3s ease, background 0.3s ease;
+    }
+    .nav-toggle span:nth-child(1) { top: 13px; }
+    .nav-toggle span:nth-child(2) { top: 19px; }
+    .nav-toggle span:nth-child(3) { top: 25px; }
+    .site-nav.is-scrolled .nav-toggle span { background: #2a2118; }
+    .site-nav.is-open .nav-toggle span { background: #2a2118; }
+    .site-nav.is-open .nav-toggle span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+    .site-nav.is-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    .site-nav.is-open .nav-toggle span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
+    /* ---------- Mobile menu overlay ---------- */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 250, 243, 0.98);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      z-index: 49;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .site-nav.is-open .mobile-menu {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-menu__close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .mobile-menu__close span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 22px;
+      height: 2px;
+      background: #2a2118;
+      border-radius: 2px;
+      transform-origin: center;
+    }
+    .mobile-menu__close span:nth-child(1) { transform: translate(-50%, -50%) rotate(45deg); }
+    .mobile-menu__close span:nth-child(2) { transform: translate(-50%, -50%) rotate(-45deg); }
+
+    .mobile-menu__nav {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      text-align: center;
+    }
+    .mobile-menu__item {
+      font-size: 28px;
+      font-weight: 500;
+      color: #2a2118;
+      letter-spacing: -0.5px;
+    }
+    body.is-menu-open { overflow: hidden; }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -186,9 +279,9 @@
       position: relative;
       z-index: 1;
       display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 116px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 48px;
       padding: 0 var(--side-pad) 64px;
       /* center vertically inside the 100vh hero, then nudge slightly toward the bottom */
       margin-top: auto;
@@ -224,31 +317,6 @@
       letter-spacing: -2.56px;
       line-height: 1;
       color: #fff;
-    }
-
-    .hero-accordion {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-    }
-    .acc-img {
-      height: 251px;
-      border-radius: 2px;
-      overflow: hidden;
-      position: relative;
-      /* accordion sizing: collapsed width 88px, grows to fill */
-      flex: 0 1 88px;
-      min-width: 88px;
-      cursor: pointer;
-      transition: flex-grow 0.45s ease;
-    }
-    .acc-img img { width: 100%; height: 100%; object-fit: cover; }
-    /* the active image expands; state is driven by JS so the gaps
-       between images never collapse everything (fast-hover safe) */
-    .acc-img.is-active {
-      flex-grow: 1;
-      border: 0.5px solid #fff;
     }
 
     .hero-right {
@@ -306,7 +374,11 @@
 
     /* ---------- Responsive ---------- */
     @media (max-width: 1100px) {
-      .topbar { padding: 32px 48px; }
+      .topbar {
+        padding: 32px 48px;
+        grid-template-columns: 1fr auto;
+      }
+      .nav-logo { display: none; }
       .hero__content {
         flex-direction: column;
         align-items: stretch;
@@ -320,13 +392,14 @@
     @media (max-width: 720px) {
       /* hero fills exactly one screen on phones */
       .hero { position: static; height: 100svh; overflow: hidden; }
-      /* simple 2-zone bar on phones: logo left, CTA right */
+      /* 3-zone bar on phones: hamburger left, logo center, CTA right */
       .topbar {
-        grid-template-columns: 1fr auto;
+        grid-template-columns: auto 1fr auto;
         padding: 14px 20px;
       }
       .topbar .navbar { display: none; }
-      .topbar .nav-logo { justify-self: start; }
+      .nav-toggle { display: block; }
+      .topbar .nav-logo { justify-self: center; }
       /* over the hero the nav-logo would clash with the hero badge — hide it
          until the bar is scrolled into its solid state */
       .site-nav:not(.is-scrolled) .nav-logo { display: none; }
@@ -336,21 +409,20 @@
       /* hero content: padding-top clears the fixed nav, padding-bottom gives
          the CTA buttons room to breathe above the fold */
       .hero__content {
+        min-height: 100svh;
         padding: 96px 20px 80px;
         gap: 28px;
         margin-top: 0;
         margin-bottom: 0;
         transform: none;
         align-items: stretch;
-        justify-content: flex-start;
+        justify-content: flex-end;
       }
       /* smaller badge/logo in the hero so content fits within 100svh */
       .hero-badge { height: 40px; }
       /* tighten gaps to recover vertical space */
       .hero-left { gap: 28px; }
       .hero-headline { font-size: 38px; letter-spacing: -1.2px; }
-      .hero-accordion { gap: 6px; }
-      .acc-img { height: 180px; flex-basis: 64px; min-width: 64px; }
     }
 
     /* keep the nav legible on bright hero photos (tablet hero crops a lot of
@@ -547,109 +619,6 @@
       border-bottom-color: #c8723a;
     }
 
-    /* ===================== PARALLAX SPACER ===================== */
-    .spacer {
-      position: relative;
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 138px var(--side-pad);
-      color: #fff;
-      background-color: #1a0a00;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      background-attachment: fixed;
-      overflow: hidden;
-    }
-    .parallax-spacer__overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(26, 10, 0, 0.55);
-      z-index: 1;
-    }
-    .parallax-spacer__layer { display: none; }
-    .parallax-spacer__content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: center;
-    }
-    .spacer__eyebrow {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: rgba(232, 168, 120, 0.85);
-    }
-    .spacer__title {
-      font-size: 52px;
-      font-weight: 500;
-      line-height: 1.15;
-      letter-spacing: -1.5px;
-      color: #fff;
-    }
-    .spacer__text {
-      font-size: 15px;
-      line-height: 26px;
-      color: #d3d3d3;
-      max-width: 720px;
-    }
-
-    /* ----- Spacer 1: pinned background (background-attachment: fixed) -----
-       Plain & rock-solid. The scroll-driven block below DOES NOT touch it. */
-    /* (no extra rules needed — .spacer already sets background-attachment: fixed) */
-
-    /* ----- Spacer 2: scroll-driven drift (more intense), via view() timeline -----
-       Layer is oversized by -34% so the ±28% translate never reveals an edge.
-       overflow:clip on the section (not hidden!) — hidden would create a scroll
-       container and freeze view() progress. */
-    @keyframes bgDriftStrong {
-      from { transform: translateY(-28%) scale(1.05); }
-      to   { transform: translateY(28%)  scale(1.05); }
-    }
-    @keyframes contentRise {
-      from { opacity: 0; transform: translateY(48px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @supports (animation-timeline: view()) {
-      .parallax-spacer--drift {
-        background-image: none !important;
-        background-attachment: scroll;
-        overflow: clip;
-      }
-      .parallax-spacer--drift .parallax-spacer__layer {
-        display: block;
-        position: absolute;
-        inset: -34% 0;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        z-index: 0;
-        will-change: transform;
-        animation: bgDriftStrong linear both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-      }
-      .parallax-spacer--drift .parallax-spacer__content {
-        animation: contentRise linear both;
-        animation-timeline: view();
-        animation-range: entry 15% cover 45%;
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .parallax-spacer--drift .parallax-spacer__layer,
-      .parallax-spacer--drift .parallax-spacer__content { animation: none; }
-    }
-    /* iOS / mobile: fixed-attachment is janky, so fall back to a static cover image */
-    @media (hover: none), (max-width: 1024px) {
-      .spacer { background-attachment: scroll; }
-    }
-
     /* ===================== UNIT TYPES ===================== */
     .section-unit-types {
       background: #fffaf3;
@@ -701,18 +670,12 @@
       pointer-events: none;
       transition: opacity 0.5s ease;
     }
-    .unit-card:hover .unit-card__overlay { opacity: 0; }
     .unit-card__body {
       position: relative;
       z-index: 1;
       display: flex;
       flex-direction: column;
       gap: 18px;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-    }
-    .unit-card:hover .unit-card__body {
-      transform: translateY(110%);
-      opacity: 0;
     }
     .unit-card__title {
       font-size: 24px;
@@ -883,6 +846,7 @@
       gap: 45px;
       align-items: center;
     }
+
     .section-floorplan > .tab-group {
       width: 100%;
       max-width: 1240px;
@@ -895,12 +859,7 @@
       gap: 32px;
       align-items: start;
     }
-    .floorplan-floors {
-      grid-column: 1 / 2;
-      display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
+    .floorplan-floors { display: none; }
     .pill {
       padding: 11px 26px;
       border-radius: 36px;
@@ -922,23 +881,47 @@
     }
     .floorplan-plan {
       grid-column: 1 / 2;
-      grid-row: 2 / 3;
+      grid-row: 1 / 3;
       background: transparent;
-      min-height: 420px;
+      display: flex;
+      gap: 80px;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .fp-slot {
+      display: none;
+      position: relative;
+      flex: 1 1 0;
+      max-width: 340px;
+      min-width: 0;
+      aspect-ratio: 340 / 520;
+      margin: 0;
+    }
+    .fp-slot--visible {
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .fp-img {
-      display: none;
-      width: 100%;
-      height: auto;
-      max-height: 540px;
-      object-fit: contain;
-      background: transparent;
+    .fp-slot__caption {
+      position: absolute;
+      bottom: -32px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #3d1c00;
     }
-    .fp-img--visible { display: block; }
+    .fp-img {
+      width: 147%;
+      height: auto;
+      max-width: none;
+      transform: rotate(-90deg);
+      transform-origin: center;
+    }
     .floorplan-specs {
+      margin-top: 75px;
       grid-column: 2 / 3;
       grid-row: 1 / 3;
       display: flex;
@@ -1042,42 +1025,46 @@
     .locmap-cards {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       align-content: start;
     }
     .locmap-card {
-      background: transparent;
-      border: 0.5px solid #e5d4ba;
-      border-radius: 12px;
-      padding: 22px 22px;
+      background: #fffaf3;
+      border: 1px solid #ead9bf;
+      border-radius: 999px;
+      padding: 12px 18px 12px 12px;
       display: flex;
       align-items: center;
       gap: 14px;
-      transition: background 0.2s ease, border-color 0.2s ease;
     }
-    .locmap-card:hover { background: rgba(99, 61, 0, 0.04); border-color: #c8b894; }
     .locmap-card__pin {
       flex: 0 0 auto;
-      width: 22px;
-      height: 22px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff3e0;
       color: #c8723a;
       display: inline-flex;
       align-items: center;
       justify-content: center;
     }
-    .locmap-card__pin svg { width: 100%; height: 100%; }
+    .locmap-card__pin svg { width: 20px; height: 20px; }
     .locmap-card__name {
       flex: 1;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 600;
       color: #3d1c00;
       line-height: 1.35;
+      letter-spacing: -0.2px;
     }
     .locmap-card__time {
       flex: 0 0 auto;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       color: #6b4b2a;
+      background: #f5e9d3;
+      padding: 6px 14px;
+      border-radius: 999px;
       white-space: nowrap;
     }
 
@@ -1096,7 +1083,11 @@
       .section-locmap { padding: 72px 20px; }
       .section-locmap__inner { gap: 36px; }
       .locmap-mapwrap { min-height: 320px; border-radius: 14px; }
-      .locmap-card { padding: 20px 18px; }
+      .locmap-card { padding: 10px 14px 10px 10px; gap: 10px; }
+      .locmap-card__pin { width: 36px; height: 36px; }
+      .locmap-card__pin svg { width: 18px; height: 18px; }
+      .locmap-card__name { font-size: 14px; }
+      .locmap-card__time { font-size: 12px; padding: 5px 11px; }
     }
 
     /* ===================== CONTACT ===================== */
@@ -1218,9 +1209,8 @@
     /* ===================== RESPONSIVE ===================== */
     @media (max-width: 1200px) {
       .section-location, .section-facility, .section-unit-types,
-      .section-siteplan, .section-floorplan, .contact-section { padding: 100px 48px; }
+      .section-siteplan, .section-floorplan, .section-locmap, .contact-section { padding: 100px 48px; }
       .site-footer { padding: 64px 48px 32px; }
-      .spacer { padding: 100px 48px; }
     }
     @media (max-width: 1100px) {
       .section-location__inner { flex-direction: column; gap: 56px; }
@@ -1237,8 +1227,8 @@
       .section-siteplan__text-col { width: 100%; }
       .section-siteplan__map { width: 100%; }
       .section-floorplan__content { grid-template-columns: 1fr; }
-      .floorplan-specs { grid-column: 1; grid-row: auto; flex-direction: row; flex-wrap: wrap; gap: 24px; }
-      .floorplan-specs__list { flex-direction: row; flex-wrap: wrap; gap: 20px 32px; flex: 1; }
+      .floorplan-specs { grid-column: 1; grid-row: auto; flex-direction: column; gap: 24px; }
+      .floorplan-specs__list { flex-direction: row; flex-wrap: wrap; gap: 20px 32px; }
       .floorplan-spec { flex: 1 1 140px; }
       .contact-section__inner { grid-template-columns: 1fr; }
       .unit-cards { grid-template-columns: 1fr; }
@@ -1247,10 +1237,8 @@
       .section-location, .section-facility, .section-unit-types,
       .section-siteplan, .section-floorplan, .contact-section { padding: 72px 20px; }
       .site-footer { padding: 56px 20px 24px; }
-      .spacer { padding: 80px 20px; min-height: 480px; }
       .section-heading { font-size: 36px; line-height: 44px; }
       .section-subheading { font-size: 34px; line-height: 42px; }
-      .spacer__title { font-size: 38px; line-height: 46px; }
       /* tabs can't all fit at 375px without overlapping — give them their
          natural width and make the row horizontally scrollable instead */
       .tab-group { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }

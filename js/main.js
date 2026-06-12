@@ -28,82 +28,36 @@
       update();
     })();
 
+    /* ===================== Mobile menu toggle ===================== */
     (function () {
-      var accordion = document.querySelector('.hero-accordion');
-      if (!accordion) return;
+      var nav = document.getElementById('siteNav');
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      if (!nav || !toggle || !menu) return;
 
-      var items = Array.prototype.slice.call(accordion.querySelectorAll('.acc-img'));
-      if (!items.length) return;
-      var defaultItem = accordion.querySelector('[data-default]') || items[0];
-
-      var AUTOPLAY_MS = 3000;
-      var autoTimer = null;
-
-      function setActive(item) {
-        items.forEach(function (el) {
-          el.classList.toggle('is-active', el === item);
-        });
+      function setOpen(open) {
+        nav.classList.toggle('is-open', open);
+        document.body.classList.toggle('is-menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
       }
 
-      /* ---------- Desktop: hover-driven ---------- */
-      // Expanding follows the mouse, but leaving the accordion keeps the
-      // last hovered image open — it only changes on the next hover.
-      function onEnter() { setActive(this); }
-
-      function enableHover() {
-        items.forEach(function (item) { item.addEventListener('mouseenter', onEnter); });
-      }
-      function disableHover() {
-        items.forEach(function (item) { item.removeEventListener('mouseenter', onEnter); });
-      }
-
-      /* ---------- Mobile / tablet: auto-cycle ---------- */
-      function startAuto() {
-        stopAuto();
-        var current = items.indexOf(accordion.querySelector('.acc-img.is-active'));
-        if (current < 0) current = 0;
-        autoTimer = setInterval(function () {
-          current = (current + 1) % items.length;
-          setActive(items[current]);
-        }, AUTOPLAY_MS);
-      }
-      function stopAuto() {
-        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
-      }
-
-      /* ---------- Mode switching ---------- */
-      var autoMQ = window.matchMedia('(max-width: 1100px)');
-      var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-      function applyMode() {
-        disableHover();
-        stopAuto();
-        setActive(defaultItem);
-
-        if (autoMQ.matches) {
-          // touch / small screens: cycle automatically (unless reduced motion)
-          if (!reduceMQ.matches) startAuto();
-        } else {
-          // desktop: wait for hover
-          enableHover();
-        }
-      }
-
-      function bind(mq, fn) {
-        if (mq.addEventListener) mq.addEventListener('change', fn);
-        else if (mq.addListener) mq.addListener(fn); // older Safari
-      }
-      bind(autoMQ, applyMode);
-      bind(reduceMQ, applyMode);
-
-      // Pause autoplay when the tab is hidden, resume when visible.
-      document.addEventListener('visibilitychange', function () {
-        if (autoTimer === null && !autoMQ.matches) return;
-        if (document.hidden) stopAuto();
-        else if (autoMQ.matches && !reduceMQ.matches) startAuto();
+      toggle.addEventListener('click', function () {
+        setOpen(!nav.classList.contains('is-open'));
       });
 
-      applyMode();
+      var closeBtn = document.getElementById('navClose');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function () { setOpen(false); });
+      }
+
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setOpen(false); });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) setOpen(false);
+      });
     })();
 
     /* ===================== FACILITY tab interactions ===================== */
@@ -160,13 +114,11 @@
 
     /* ===================== FLOORPLAN interactions ===================== */
     (function () {
-      var typeBtns  = document.querySelectorAll('[data-fp-type]');
-      var floorBtns = document.querySelectorAll('[data-fp-floor]');
-      var plans     = document.querySelectorAll('.fp-img');
-      if (!typeBtns.length || !plans.length) return;
+      var typeBtns = document.querySelectorAll('.tab[data-fp-type]');
+      var slots    = document.querySelectorAll('.fp-slot');
+      if (!typeBtns.length || !slots.length) return;
 
-      var curType  = 'type9';
-      var curFloor = '1';
+      var curType = 'type9';
 
       var specs = {
         type9: {
@@ -190,9 +142,8 @@
       };
 
       function showPlan() {
-        plans.forEach(function (p) {
-          p.classList.toggle('fp-img--visible',
-            p.dataset.fpType === curType && p.dataset.fpFloor === curFloor);
+        slots.forEach(function (s) {
+          s.classList.toggle('fp-slot--visible', s.dataset.fpType === curType);
         });
       }
 
@@ -217,16 +168,6 @@
           });
           showPlan();
           updateSpecs();
-        });
-      });
-
-      floorBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          curFloor = btn.dataset.fpFloor;
-          floorBtns.forEach(function (b) {
-            b.classList.toggle('pill--active', b.dataset.fpFloor === curFloor);
-          });
-          showPlan();
         });
       });
 
