@@ -1100,7 +1100,7 @@
     .contact-section__bg {
       position: absolute;
       inset: 0;
-      background: #fffaf3 url('../asset/hero-bg.webp') center/cover no-repeat;
+      background: #fffaf3 url('../asset/contact-bg.webp') center/cover no-repeat;
       z-index: -2;
     }
     .contact-section__bg::after {
@@ -1296,7 +1296,7 @@
     @media (max-width: 720px) {
       .unit-cards { grid-template-columns: 1fr; }
       .section-location, .section-facility, .section-unit-types,
-      .section-siteplan, .section-floorplan, .contact-section { padding: 72px 20px; }
+      .section-siteplan, .section-floorplan, .section-locmap, .contact-section { padding: 72px 20px; }
       .site-footer { padding: 56px 20px 24px; }
       .section-heading { font-size: 36px; line-height: 44px; }
       .section-subheading { font-size: 34px; line-height: 42px; }

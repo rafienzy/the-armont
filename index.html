@@ -332,24 +332,25 @@
 
   <!-- ===================== CONTACT LEAD FORM ===================== -->
   <section class="contact-section" id="book">
+    <div class="contact-section__bg" aria-hidden="true"></div>
     <div class="contact-section__inner">
       <div class="contact-section__text">
-        <p class="eyebrow-accent">HUBUNGI KAMI</p>
-        <h2 class="section-heading">Jadwalkan kunjungan ke show unit</h2>
-        <p class="section-paragraph">Tim kami siap membantu Anda menemukan unit yang paling sesuai dengan kebutuhan keluarga.</p>
+        <h2 class="contact-section__heading">Jadwalkan kunjungan<br/>ke show unit</h2>
+        <p class="contact-section__sub">Tim kami siap membantu Anda menemukan unit yang paling sesuai dengan kebutuhan keluarga.</p>
       </div>
       <form class="contact-form" onsubmit="event.preventDefault(); alert('Terima kasih! Tim kami akan menghubungi Anda.');">
-        <label class="contact-field"><span>Nama Lengkap</span><input type="text" required placeholder="Masukkan nama Anda" /></label>
-        <label class="contact-field"><span>Nomor WhatsApp</span><input type="tel" required placeholder="08xx-xxxx-xxxx" /></label>
+        <label class="contact-field"><span>Nama Lengkap</span><input type="text" required placeholder="Masukan nama Anda" /></label>
+        <label class="contact-field"><span>Nomor Whatsapp</span><input type="tel" required placeholder="0812-3456-7890" /></label>
         <label class="contact-field"><span>Email</span><input type="email" required placeholder="anda@email.com" /></label>
-        <label class="contact-field"><span>Tipe Yang Diminati</span>
+        <label class="contact-field"><span>Tipe yang Diminati</span>
           <select>
+            <option value="" disabled selected>Klik untuk memilih</option>
             <option>The Novel Type 9</option>
             <option>The Novel Type 8</option>
             <option>Belum Tentukan</option>
           </select>
         </label>
-        <button type="submit" class="btn contact-submit">KIRIM PERMINTAAN</button>
+        <button type="submit" class="contact-submit">KIRIM PERMINTAAN</button>
       </form>
     </div>
   </section>
