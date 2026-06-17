@@ -171,7 +171,7 @@
         t.addEventListener('click', function () { setActiveTab(t.dataset.facility); });
       });
 
-      setActiveTab('clubhouse');
+      setActiveTab('graceley');
     })();
 
     /* ===================== FLOORPLAN interactions ===================== */
