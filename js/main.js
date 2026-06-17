@@ -237,18 +237,3 @@
       updateSpecs();
     })();
 
-    /* ===================== SITEPLAN legend hover ===================== */
-    (function () {
-      var map = document.getElementById('siteplanMap');
-      if (!map) return;
-      var items = document.querySelectorAll('.siteplan-legend__item[data-chapter]');
-      items.forEach(function (it) {
-        var ch = it.dataset.chapter;
-        function show() { map.classList.add('sp-show-' + ch); }
-        function hide() { map.classList.remove('sp-show-' + ch); }
-        it.addEventListener('mouseenter', show);
-        it.addEventListener('mouseleave', hide);
-        it.addEventListener('focus', show);
-        it.addEventListener('blur', hide);
-      });
-    })();
