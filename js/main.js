@@ -60,56 +60,118 @@
       });
     })();
 
-    /* ===================== FACILITY tab interactions ===================== */
+    /* ===================== FACILITY tab + slideshow ===================== */
     (function () {
-      var tabs = document.querySelectorAll('[data-facility]');
+      var tabs      = document.querySelectorAll('[data-facility]');
       if (!tabs.length) return;
 
-      var img   = document.getElementById('facilityImg');
-      var title = document.getElementById('facilityTitle');
-      var desc  = document.getElementById('facilityDesc');
-      var perks = document.getElementById('facilityPerks');
+      var slidesEl  = document.getElementById('facilitySlides');
+      var dotsEl    = document.getElementById('facilityDots');
+      var prevBtn   = document.getElementById('facilityPrev');
+      var nextBtn   = document.getElementById('facilityNext');
+      var titleEl   = document.getElementById('facilityTitle');
+      var descEl    = document.getElementById('facilityDesc');
+      var perksEl   = document.getElementById('facilityPerks');
 
       var data = {
         clubhouse: {
-          img: 'asset/facility-clubhouse.webp',
+          images: [
+            'asset/facility-06_05_the-armont_clubhouse-visual.webp',
+            'asset/facility-06_05_the-armont_clubhouse-visual_02.webp',
+            'asset/facility-06_05_the-armont_clubhouse-visual_03.webp',
+            'asset/facility-06_09_the-armont_ch-02.webp'
+          ],
           title: 'Le Gran Clubhouse',
-          desc: 'Klub eksklusif hanya untuk penghuni The Armont — mempertemukan alam dan wellness dalam satu ruang bersama. Didesain sebagai Royal Retreat, tempat keluarga Anda beristirahat dan tumbuh bersama.',
+          desc:  'Klub eksklusif hanya untuk penghuni The Armont — mempertemukan alam dan wellness dalam satu ruang bersama. Didesain sebagai Royal Retreat, tempat keluarga Anda beristirahat dan tumbuh bersama.',
           perks: ['Swimming Pool', 'Gym', 'Children Playground', 'Multifunction Area']
         },
         tudor: {
-          img: 'asset/tudor-park.webp',
+          images: [
+            'asset/facility-tudor--jp-9207.webp',
+            'asset/facility-tudor--jp-9246.webp'
+          ],
           title: 'Tudor Park',
-          desc: 'Ruang hijau yang dirancang untuk keluarga berkumpul, anak-anak bermain, dan komunitas tumbuh. Penuhi sore Anda dengan udara segar dan suara alam.',
+          desc:  'Ruang hijau yang dirancang untuk keluarga berkumpul, anak-anak bermain, dan komunitas tumbuh. Penuhi sore Anda dengan udara segar dan suara alam.',
           perks: ['Jogging Track', 'Outdoor Gym', 'Pet Friendly', 'Picnic Area']
         },
         graceley: {
-          img: 'asset/graceley-park.webp',
+          images: [
+            'asset/facility-graceley--jp-8955.webp',
+            'asset/facility-graceley--jp-9036.webp',
+            'asset/facility-graceley--jp-9117.webp'
+          ],
           title: 'Graceley Park',
-          desc: 'Taman tematik dengan area bermain anak, instalasi seni, dan plaza komunitas — tempat Anda menciptakan kenangan keluarga setiap akhir pekan.',
+          desc:  'Taman tematik dengan area bermain anak, instalasi seni, dan plaza komunitas — tempat Anda menciptakan kenangan keluarga setiap akhir pekan.',
           perks: ['Kids Playground', 'Art Installation', 'Community Plaza', 'Open Lawn']
         }
       };
 
-      function setActive(key) {
+      var currentIdx = 0;
+      var currentImages = [];
+      var autoTimer = null;
+      var INTERVAL = 4000;
+
+      function buildSlides(images) {
+        currentImages = images;
+        currentIdx = 0;
+        slidesEl.innerHTML = images.map(function (src, i) {
+          return '<img class="facility-slide' + (i === 0 ? ' facility-slide--active' : '') + '" src="' + src + '" alt="" />';
+        }).join('');
+        buildDots(images.length);
+      }
+
+      function buildDots(count) {
+        dotsEl.innerHTML = '';
+        for (var i = 0; i < count; i++) {
+          var d = document.createElement('button');
+          d.className = 'facility-dot' + (i === 0 ? ' facility-dot--active' : '');
+          d.setAttribute('aria-label', 'Slide ' + (i + 1));
+          d.dataset.idx = i;
+          d.addEventListener('click', function () { goTo(+this.dataset.idx); resetAuto(); });
+          dotsEl.appendChild(d);
+        }
+      }
+
+      function goTo(idx) {
+        var slides = slidesEl.querySelectorAll('.facility-slide');
+        var dots   = dotsEl.querySelectorAll('.facility-dot');
+        slides[currentIdx].classList.remove('facility-slide--active');
+        dots[currentIdx] && dots[currentIdx].classList.remove('facility-dot--active');
+        currentIdx = (idx + currentImages.length) % currentImages.length;
+        slides[currentIdx].classList.add('facility-slide--active');
+        dots[currentIdx] && dots[currentIdx].classList.add('facility-dot--active');
+      }
+
+      function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(function () { goTo(currentIdx + 1); }, INTERVAL);
+      }
+
+      function setActiveTab(key) {
         var d = data[key];
         if (!d) return;
         tabs.forEach(function (t) {
           t.classList.toggle('tab--active', t.dataset.facility === key);
         });
-        if (img) img.src = d.img;
-        if (title) title.textContent = d.title;
-        if (desc) desc.textContent = d.desc;
-        if (perks) {
-          perks.innerHTML = d.perks.map(function (p) {
+        buildSlides(d.images);
+        if (titleEl) titleEl.textContent = d.title;
+        if (descEl)  descEl.textContent  = d.desc;
+        if (perksEl) {
+          perksEl.innerHTML = d.perks.map(function (p) {
             return '<span class="perk">' + p + '</span>';
           }).join('');
         }
+        resetAuto();
       }
 
+      prevBtn && prevBtn.addEventListener('click', function () { goTo(currentIdx - 1); resetAuto(); });
+      nextBtn && nextBtn.addEventListener('click', function () { goTo(currentIdx + 1); resetAuto(); });
+
       tabs.forEach(function (t) {
-        t.addEventListener('click', function () { setActive(t.dataset.facility); });
+        t.addEventListener('click', function () { setActiveTab(t.dataset.facility); });
       });
+
+      setActiveTab('clubhouse');
     })();
 
     /* ===================== FLOORPLAN interactions ===================== */
@@ -124,20 +186,20 @@
         type9: {
           title: 'The Novel Type 9',
           luas: '153 m²',
+          bangunan: '200 m²',
           carport: '2',
           bedroom: '4',
           bathroom: '4',
-          courtyard: '1',
-          avail: '6 UNIT TERSEDIA'
+          courtyard: '1'
         },
         type8: {
           title: 'The Novel Type 8',
           luas: '120 m²',
+          bangunan: '158 m²',
           carport: '2',
           bedroom: '2',
           bathroom: '3',
-          courtyard: '1',
-          avail: '8 UNIT TERSEDIA'
+          courtyard: '1'
         }
       };
 
@@ -153,11 +215,11 @@
         var el = function (id) { return document.getElementById(id); };
         if (el('fpSpecTitle')) el('fpSpecTitle').textContent = s.title;
         if (el('fpLuas')) el('fpLuas').textContent = s.luas;
+        if (el('fpBangunan')) el('fpBangunan').textContent = s.bangunan;
         if (el('fpCarport')) el('fpCarport').textContent = s.carport;
         if (el('fpBedroom')) el('fpBedroom').textContent = s.bedroom;
         if (el('fpBathroom')) el('fpBathroom').textContent = s.bathroom;
         if (el('fpCourtyard')) el('fpCourtyard').textContent = s.courtyard;
-        if (el('fpAvail')) el('fpAvail').textContent = s.avail;
       }
 
       typeBtns.forEach(function (btn) {

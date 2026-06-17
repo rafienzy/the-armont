@@ -61,12 +61,15 @@
       height: 100%;
       object-fit: cover;
     }
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(105,36,11,0.75) 0%, rgba(220,125,90,0) 100%);
+    }
     @media (max-width: 720px) {
       .hero__bg::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.40) 100%);
+        background: linear-gradient(to bottom, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.55) 100%);
       }
     }
 
@@ -324,7 +327,7 @@
       flex-direction: column;
       justify-content: center;
       gap: 24px;
-      width: 462px;
+      width: 662px;
       max-width: 100%;
       padding-bottom: 8px;
     }
@@ -533,52 +536,110 @@
     .section-facility__inner {
       display: flex;
       flex-direction: column;
-      gap: 45px;
+      gap: 37px;
+    }
+    .section-facility__img {
+      width: 100%;
+      height: 521px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #d4c4a8;
+      position: relative;
+    }
+    .facility-slides {
+      position: absolute;
+      inset: 0;
+    }
+    .facility-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .facility-slide--active {
+      opacity: 1;
+    }
+    .facility-slider__controls {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 2;
+    }
+    .facility-slider__prev,
+    .facility-slider__next {
+      background: rgba(255,255,255,0.25);
+      border: 1px solid rgba(255,255,255,0.5);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s ease;
+    }
+    .facility-slider__prev:hover,
+    .facility-slider__next:hover { background: rgba(255,255,255,0.45); }
+    .facility-slider__dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .facility-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .facility-dot--active {
+      background: #fff;
+      transform: scale(1.3);
     }
     .section-facility__header {
       display: flex;
       flex-direction: column;
-      gap: 45px;
-    }
-    .section-facility__content {
-      display: flex;
-      gap: 60px;
-      align-items: center;
-    }
-    .section-facility__img {
-      flex: 1.25 1 0;
-      min-width: 0;
-      aspect-ratio: 1 / 1;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #d4c4a8;
-    }
-    .section-facility__img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      gap: 29px;
     }
     .section-facility__text-col {
       display: flex;
       flex-direction: column;
-      gap: 28px;
-      flex: 1 1 0;
-      min-width: 0;
+      gap: 32px;
+    }
+    .section-facility__name {
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.96px;
+      color: #3d1c00;
     }
     .perks {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      max-width: 544px;
+      gap: 12px;
     }
     .perk {
       border: 1px solid #c8723a;
       border-radius: 36px;
-      padding: 12px 28px;
-      font-size: 14px;
-      font-weight: 600;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 700;
       color: #3d1c00;
-      line-height: 1;
+      line-height: 1.4;
       white-space: nowrap;
       transition: background 0.25s ease, color 0.25s ease;
     }
@@ -1068,6 +1129,20 @@
       white-space: nowrap;
     }
 
+    .locmap-card__soon {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #9a6030;
+      background: #f0dcc0;
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
     .locmap-note {
       font-size: 11px;
       color: #a0917f;
@@ -1260,8 +1335,17 @@
       transition: color 0.2s;
     }
     .site-footer__cols a:hover { color: #fff; }
+    .site-footer__disclaimer {
+      margin-top: 40px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(245,225,206,0.15);
+      font-size: 11px;
+      line-height: 1.6;
+      color: rgba(245,225,206,0.40);
+    }
+
     .site-footer__bottom {
-      margin: 24px 0 0;
+      margin: 16px 0 0;
       font-size: 12px;
       color: rgba(245,225,206,0.55);
       text-align: center;
@@ -1278,12 +1362,7 @@
       .section-location__text-col,
       .section-location__media-col { width: 100%; }
       .section-location__body { width: 100%; }
-      .section-facility__content { flex-direction: column; gap: 48px; }
-      .section-facility__img,
-      .section-facility__text-col { width: 100%; }
-      /* flex-basis:0 collapses the image height in column mode — override with
-         flex:none so the explicit height:480px is the definitive size */
-      .section-facility__img { flex: none; height: 480px; aspect-ratio: unset; }
+      .section-facility__img { height: 420px; }
       .section-siteplan { flex-direction: column; gap: 48px; }
       .section-siteplan__text-col { width: 100%; }
       .section-siteplan__map { width: 100%; }
@@ -1306,7 +1385,9 @@
       .tab-group::-webkit-scrollbar { display: none; }
       .tab-group__tabs { gap: 0; min-width: max-content; }
       .tab { min-width: 0; padding: 12px 18px; font-size: 14px; }
-      .section-facility__img { flex: none; height: 320px; }
+      .section-facility__img { height: 260px; }
+      .section-facility__name { font-size: 36px; letter-spacing: -0.5px; }
+      .perk { font-size: 15px; padding: 12px 24px; }
       .unit-card { height: 460px; padding: 24px; }
       .unit-card__specs { gap: 18px; }
       /* center the floor pills on mobile */
