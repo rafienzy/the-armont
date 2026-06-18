@@ -185,8 +185,7 @@
       var specs = {
         type9: {
           title: 'The Novel Type 9',
-          luas: '153 m²',
-          bangunan: '200 m²',
+          bangunan: '153 m²',
           carport: '2',
           bedroom: '4',
           bathroom: '4',
@@ -194,8 +193,7 @@
         },
         type8: {
           title: 'The Novel Type 8',
-          luas: '120 m²',
-          bangunan: '158 m²',
+          bangunan: '120 m²',
           carport: '2',
           bedroom: '2',
           bathroom: '3',
@@ -214,7 +212,6 @@
         if (!s) return;
         var el = function (id) { return document.getElementById(id); };
         if (el('fpSpecTitle')) el('fpSpecTitle').textContent = s.title;
-        if (el('fpLuas')) el('fpLuas').textContent = s.luas;
         if (el('fpBangunan')) el('fpBangunan').textContent = s.bangunan;
         if (el('fpCarport')) el('fpCarport').textContent = s.carport;
         if (el('fpBedroom')) el('fpBedroom').textContent = s.bedroom;
